@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict INSURANCE PRIZE</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+		<input type="number" min="0" name="age" placeholder="Age" required="required" />
+        <input type="number" min="0" name="bmi" placeholder="BMI" required="required" />
+        <input type="number" min="0" name="children" placeholder="No. of children" required="required" />
+
+        <h2>SMOKER</h2>
+        <input type="radio" name="smoker" id="option1" value="yes" required='required'> YES </input><br>
+        <input type="radio" name="smoker" id="option2" value="no"> NO </input><br>
+
+        <h2>SEX</h2>
+        <input type="radio" name="sex" id="option1" value="male" required='required'> MALE </input><br>
+        <input type="radio" name="sex" id="option2" value="female"> FEMALE </input><br>
+        
+        <h2>REGION</h2>
+        <input type="radio" name="regions" id="option1" value="northeast" required='required' > NORTHEAST </input><br>
+        <input type="radio" name="regions" id="option2" value="northwest" > NORTHWEST </input><br>
+        <input type="radio" name="regions" id="option3" value="southeast"> SOUTHEAST </input><br>
+        <input type="radio" name="regions" id="option4" value="southwest"> SOUTHWEST </input><br>
+
+
+		
+        <tr>
+            <td><button type="submit" class="btn btn-primary btn-block btn-large">Predict</button></td>
+        </tr>
+
+            <div class='user_warning_message'></div>
+            </table>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script>
+              $(document).ready(function() {
+
+                $("input[name='sex']").change(function(){
+                $('.user_warning_message').html('');
+              });
+
+              $("input[name='smoker']").change(function(){
+                $('.user_warning_message').html('');
+              });
+
+
+              $("input[name='regions']").change(function(){
+                $('.user_warning_message').html('');
+              });
+            });
+             </script>
+        
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
